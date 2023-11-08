@@ -26,3 +26,6 @@ Route::get('/articles/detail/{id}', [ArticleController::class, 'detail']);
 Route::get("/products", [ProductController::class, "index"]);
 
 //Remark : Single Action Controller , Resource Controller 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

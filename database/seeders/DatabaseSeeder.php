@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         Article::factory()->count(20)->create();
 
+
     }
 }

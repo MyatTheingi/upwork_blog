@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('title');
             $table->string('body');
             $table->integer('category_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
 

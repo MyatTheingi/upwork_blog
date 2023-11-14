@@ -30,41 +30,6 @@ class ArticleController extends Controller
             'article' => $article
         ]);
     }
-
-    public function edit($id)
-    {
-        $article = Article::find($id);
-        $categories = Category::all();
-        return view('articles.edit',[
-            'article' => $article,
-            'categories'=> $categories,
-        ]);
-    }
-
-    public function update($id)
-    {
-        $validator = validator(request()->all(), [
-            "title" => "required",
-            "body" => "required",
-            "category_id" => "required",
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
-        }
-
-        $article = Article::find($id);
-        $article->title = request()->title;
-        $article->body = request()->body;
-        $article->category_id = request()->category_id;
-        $article->user_id = auth()->user()->id;
-        $article->save();
-
-        return redirect("/articles/detail/$id")->with('success','Successfully edit an article!');
-
-        // return redirect('/articles/details/'+$id)->with('info', 'Edited an article');
-
-    }
     public function add()
     {
         $categories = Category::all();
@@ -90,6 +55,7 @@ class ArticleController extends Controller
         $article->title = request()->title;
         $article->body = request()->body;
         $article->category_id = request()->category_id;
+        $article->user_id = auth()->user()->id;
         $article->save();
 
         return redirect('/articles');

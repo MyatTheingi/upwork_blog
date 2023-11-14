@@ -27,8 +27,8 @@
            
             @auth
                 @can('delete-article', $article)
-                    <a href="{{ url("/articles/delete/$article->id")}}" class="btn btn-warning">Delete</a>
-                       
+                    <a href="{{ url("/articles/edit/$article->id")}}" class="btn btn-sm btn-success">Edit</a>
+                    <a href="{{ url("/articles/delete/$article->id")}}" class="btn btn-sm btn-danger">Delete</a>  
                 @endcan
             @endauth
         </div>

@@ -11,13 +11,13 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','detail']);
+        $this->middleware('auth')->except(['index', 'detail']);
     }
     public function index()
     {
         $data = Article::latest()->paginate(5);
 
-        return view('articles.index',[
+        return view('articles.index', [
             'articles' => $data
         ]);
     }
@@ -26,7 +26,7 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        return view('articles.detail',[
+        return view('articles.detail', [
             'article' => $article
         ]);
     }
@@ -61,14 +61,45 @@ class ArticleController extends Controller
         return redirect('/articles');
     }
 
+    public function edit($id)
+    {
+        $article = Article::find($id);
+        $categories = Category::all();
+        return view('articles.edit', [
+            'article' => $article,
+            'categories' => $categories
+        ]);
+    }
+
+    public function update($id)
+    {
+        $validator = validator(request()->all(), [
+            'title' => 'required',
+            'body' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $article = Article::find($id);
+        $article->title = request()->title;
+        $article->body = request()->body;
+        $article->category_id = request()->category_id;
+        $article->save();
+
+        return redirect("articles/detail/$id")->with("info", "successfully edit");
+    }
+
     public function delete($id)
     {
         $article = Article::find($id);
-        if(Gate::allows('delete-article', $article)) {
+        if (Gate::allows('delete-article', $article)) {
             $article->delete();
-            return redirect('/articles')->with('info','Deleted an article');
+            return redirect('/articles')->with('info', 'Deleted an article');
         }
 
-        return back()->with('info','Unauthorize');
+        return back()->with('info', 'Unauthorize');
     }
 }

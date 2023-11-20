@@ -16,7 +16,7 @@
             <div class="card-subtitle mb-2 text-muted small">
               
                Category :
-                <span class="text-success">{{$article->category->name}}</span>
+                <span class="text-success">{{$article->category->name ?? 'Unknow' }}</span>
                 Comments:
                 {{ count($article->comments)}}
                 

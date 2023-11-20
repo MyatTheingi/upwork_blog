@@ -20,7 +20,7 @@
             <h5 class="card-title">{{ $article->title}}</h5>
             <div class="card-subtitle mb-2 text-muted small">
                 Author: <span class="text-success">{{ $article->user->name}}</span>,
-                Category: <span class="text-success">{{ $article->category->name}},</span>
+                Category: <span class="text-success">{{ $article->category->name ?? 'Unknow' }},</span>
                 {{ $article->created_at->diffForHumans() }}
             </div>
             <p class="card-text">{{ $article->body}}</p>

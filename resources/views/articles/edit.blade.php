@@ -25,19 +25,13 @@
             <label>Category</label>
             <select class="form-select" name="category_id">
                 @foreach($categories as $category)
-                    @if($category->id == $article->category_id )
-                        <option value="{{ $category['id'] }}" selected>
+                    <option value="{{ $category['id'] }}"  @selected($article->category_id == $category->id)>
                          {{$category['name'] }}
-                        </option>
-                    @else 
-                        <option value="{{ $category['id'] }}">
-                         {{$category['name'] }}
-                        </option>
-                    @endif
+                    </option>
                 @endforeach
             </select>
         </div>
-        <input type="submit" value="Edit Article" class="btn btn-primary">
+        <input type="submit" value="Edit Article" class="btn btn-success">
     </form>
 </div>
 @endsection

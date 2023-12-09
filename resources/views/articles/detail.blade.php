@@ -50,7 +50,7 @@
 
                     <i class="fa-solid fa-ellipsis " data-bs-toggle="dropdown"></i>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        
+
                         @auth
                         @can('delete-article', $article)
                         <li>
@@ -117,6 +117,11 @@
                 </li>
                 @endforeach
             </ul>
+            @auth
+        <form action="{{ url('/comments/add') }}" method="post">
+         ...
+        </form>
+            @endauth
         </div>
     </div>
 </div>
